@@ -33,18 +33,18 @@ app.use(function(req, res, next) {
     next();
     }); 
 
-var con = mysql.createConnection({
-  host: "34.66.247.73",
-  user: "root",
-  password: "root"
-});
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+// var con = mysql.createConnection({
+//   host: "34.66.247.73",
+//   user: "root",
+//   password: "root"
+// });
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 app.get("/users", (req, res, next) => {
-  //res.json(users);
-  return getAllUsers(res);
+  res.json(users);
+  //return getAllUsers(res);
   
  });
 
@@ -84,7 +84,7 @@ app.post("/addUser",  (req, res) => {
   //res.json(users);
 });
 
-
-app.listen(3000, () => {
- console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000; 
+app.listen(PORT, () => {
+ console.log("Server running on port :" + PORT);
 });
