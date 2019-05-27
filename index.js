@@ -16,10 +16,23 @@ console.log('--------------------------------------');
 console.log(process.env);
 console.log('--------------------------------------');
 
+console.log('-------------Variables----------------');
+var hostname  = process.env.DB_HOST;
+var username = process.env.DB_USER;
+var pwd= process.env.PASSWORD;
+
+console.log("Original : "+process.env.DB_HOST + " Saved Host name : " + hostname);
+console.log("Original : "+process.env.DB_USER+" Saved User name : " + username);
+console.log("Original : "+process.env.PASSWORD+" Saved Password : " + pwd);
+
+console.log('------------END Variable----------------');
+
+
+
 var con = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'proxyuser',
-  password: 'root',
+  host: hostname,
+  user: username,
+  password: pwd,
   database: "GCP"
 });
 con.connect(function(err) {
