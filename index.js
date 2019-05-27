@@ -14,9 +14,9 @@ app.use(function(req, res, next) {
     }); 
 
 var con = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.PASSWORD
+  host: process.env.DB_HOST | '',
+  user: process.env.DB_USER | 'root',
+  password: process.env.PASSWORD | 'root'
 });
 con.connect(function(err) {
   if (err) throw err;
@@ -38,7 +38,6 @@ var getAllUsers = function (res) {
 app.post("/addUser",  (req, res) => {
   console.log(req.body)
   var obj = {}
-  obj.id = users[users.length - 1].id + 1;
   obj.Name = req.body.Name;
   obj.Age = req.body.Age;
   obj.Address = req.body.Address;
