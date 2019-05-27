@@ -14,12 +14,12 @@ app.use(function(req, res, next) {
     }); 
 
 var con = mysql.createConnection({
-  host: process.env.DB_HOST | '',
+  host: process.env.DB_HOST,
   user: process.env.DB_USER | 'root',
   password: process.env.PASSWORD | 'root'
 });
 con.connect(function(err) {
-  if (err) throw err;
+  if (err) console.log(err);
   console.log("Connected!");
 });
 app.get("/users", (req, res, next) => {
@@ -30,7 +30,7 @@ app.get("/users", (req, res, next) => {
 
 var getAllUsers = function (res) {
   con.query('SELECT * FROM GCP.Users;', function (err, result) {
-    if (err) throw err;
+    if (err) console.log(err);
     console.log("Result: " + result);
     res.json(result);
   });
@@ -52,7 +52,7 @@ app.post("/addUser",  (req, res) => {
   sql = sql.replace('email1','"'+req.body.Email+'"');
   console.log(sql)
   con.query(sql, function (err, result) {
-    if (err) throw err;
+    if (err) console.log(err);
     console.log("Result: " + result);
     if(result.affectedRows == 1) {
       console.log(result.insertId);
