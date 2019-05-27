@@ -17,9 +17,9 @@ console.log(process.env);
 console.log('--------------------------------------');
 
 var con = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER | 'root',
-  password: process.env.PASSWORD | 'root',
+  host: '127.0.0.1',
+  user: 'proxyuser',
+  password: 'root',
   database: "GCP"
 });
 con.connect(function(err) {
