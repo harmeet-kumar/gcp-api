@@ -16,11 +16,15 @@ app.use(function(req, res, next) {
 var con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER | 'root',
-  password: process.env.PASSWORD | 'root'
+  password: process.env.PASSWORD | 'root',
+  database: "GCP"
 });
 con.connect(function(err) {
-  if (err) console.log(err);
-  console.log("Connected!");
+  if (err) { 
+    console.log(err) 
+  } else {
+    console.log("Connected!");
+  }
 });
 app.get("/users", (req, res, next) => {
   //res.json(users);
@@ -30,9 +34,12 @@ app.get("/users", (req, res, next) => {
 
 var getAllUsers = function (res) {
   con.query('SELECT * FROM GCP.Users;', function (err, result) {
-    if (err) console.log(err);
+    if (err) {
+      console.log(err)
+    } else {
+      res.json(result);
+    }
     console.log("Result: " + result);
-    res.json(result);
   });
 }
 app.post("/addUser",  (req, res) => {
@@ -58,7 +65,6 @@ app.post("/addUser",  (req, res) => {
       console.log(result.insertId);
     }
     return getAllUsers(res);
-
   });
   //res.json(users);
 });
