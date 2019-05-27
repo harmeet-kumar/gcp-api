@@ -6,45 +6,25 @@ app.use(bodyparser.json());
 app.use(express.urlencoded({
     extended: true
     })); 
-var users = [{
-    "id": 1,
-    "Name": "Ashok",
-    "Age": 22,
-    "Address": "Sector 21",
-    "Email": "hadsask@sasdad.com"
-  },
-  {
-    "id": 2,
-    "Name": "Logan",
-    "Age": 54,
-    "Address": "Vehla",
-    "Email": "hsadasdsdak@sadsad.com"
-  },
-  {
-    "id": 3,
-    "Name": "Mike Palvik",
-    "Age": 32,
-    "Address": "Dera Baba Nanak",
-    "Email": "hsadsadasdsadk@saasdd.com"
-  }];
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
     }); 
 
-// var con = mysql.createConnection({
-//   host: "34.66.247.73",
-//   user: "root",
-//   password: "root"
-// });
-// con.connect(function(err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-// });
+var con = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.PASSWORD
+});
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 app.get("/users", (req, res, next) => {
-  res.json(users);
-  //return getAllUsers(res);
+  //res.json(users);
+  return getAllUsers(res);
   
  });
 
