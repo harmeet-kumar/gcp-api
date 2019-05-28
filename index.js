@@ -43,7 +43,6 @@ con.connect(function(err) {
   }
 });
 app.get("/users", (req, res, next) => {
-  //res.json(users);
   return getAllUsers(res);
   
  });
@@ -65,9 +64,6 @@ app.post("/addUser",  (req, res) => {
   obj.Age = req.body.Age;
   obj.Address = req.body.Address;
   obj.Email = req.body.Email;
-  if(obj.Name.trim()!="") {
-      users.push(obj);
-  }
   sql = 'INSERT INTO `GCP`.`Users`(`Name`,  `Age`,`Address`,`Email`)VALUES (name1,age1,address1,email1)';
   sql = sql.replace('name1','"'+req.body.Name+'"');
   sql = sql.replace('age1',req.body.Age);
@@ -82,7 +78,6 @@ app.post("/addUser",  (req, res) => {
     }
     return getAllUsers(res);
   });
-  //res.json(users);
 });
 
 const PORT = process.env.PORT || 3000; 
